@@ -28,6 +28,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.t.videoview.videoplay.R;
 import com.t.videoview.videoplay.constant.PlayState;
@@ -186,7 +187,16 @@ public class VideoPlayer extends RelativeLayout implements View.OnTouchListener 
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            return true;
+            // TODO Auto-generated method stub,判断手势左滑还是右滑
+            if (e1.getX()-e2.getX() > FLING_MIN_DISTANCE && Math.abs(velocityX) > FLING_MIN_VELOCITY) {
+                // Fling left
+                Toast.makeText(mContext, "向左手势", Toast.LENGTH_SHORT).show();
+            } else if (e2.getX()-e1.getX() > FLING_MIN_DISTANCE && Math.abs(velocityX) > FLING_MIN_VELOCITY) {
+                // Fling right
+                Toast.makeText(mContext, "向右手势", Toast.LENGTH_SHORT).show();
+            }
+            return false;
+//            return true;
         }
     };
     private GestureDetector mGestureDetector;
